@@ -1,17 +1,11 @@
 package com.ttstudios.kalah.web;
 
 import com.ttstudios.kalah.persistence.model.KalahGame;
-import com.ttstudios.kalah.persistence.model.Message;
-import com.ttstudios.kalah.persistence.model.OutputMessage;
-import com.ttstudios.kalah.persistence.model.State;
 import com.ttstudios.kalah.persistence.repo.KalahRepository;
-import com.ttstudios.kalah.strategy.GamePlayStrategy;
 import com.ttstudios.kalah.web.exception.KalahGameIdMismatchException;
 import com.ttstudios.kalah.web.exception.KalahGameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -55,8 +47,7 @@ public class GameController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public KalahGame create(@RequestBody KalahGame game) {
-        // TODO check this
-        GamePlayStrategy gamePlay = new GamePlayStrategy();
+
         return repository.save(game);
     }
 

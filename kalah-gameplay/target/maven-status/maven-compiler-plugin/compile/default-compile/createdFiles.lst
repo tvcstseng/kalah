@@ -1,0 +1,14 @@
+com\ttstudios\kalah\ComTtstudiosKalahApplication.class
+com\ttstudios\kalah\strategy\MoveStrategy.class
+com\ttstudios\kalah\dto\Move.class
+com\ttstudios\kalah\strategy\InitializeStrategy.class
+com\ttstudios\kalah\dto\Container.class
+com\ttstudios\kalah\dto\House.class
+com\ttstudios\kalah\KalahConstants.class
+com\ttstudios\kalah\dto\Seed.class
+com\ttstudios\kalah\dto\World.class
+com\ttstudios\kalah\strategy\GamePlayStrategy.class
+com\ttstudios\kalah\dto\Player.class
+com\ttstudios\kalah\strategy\Strategy.class
+com\ttstudios\kalah\dto\Store.class
+com\ttstudios\kalah\dto\GameState.class

@@ -1,0 +1,8 @@
+be\g00glen00b\Application.class
+be\g00glen00b\config\WebConfig.class
+be\g00glen00b\config\WebSocketConfig.class
+be\g00glen00b\config\AppConfig.class
+be\g00glen00b\config\WebAppInitializer.class
+be\g00glen00b\dto\Message.class
+be\g00glen00b\controller\ChatController.class
+be\g00glen00b\dto\OutputMessage.class
