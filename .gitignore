@@ -65,3 +65,7 @@ testem.log
 .DS_Store
 Thumbs.db
 yarn.lock
+kalah-angular/kalah-angular.iml
+kalah-gameplay/kalah-gameplay.iml
+kalah-rest/kalah-rest.iml
+kalah.iml
