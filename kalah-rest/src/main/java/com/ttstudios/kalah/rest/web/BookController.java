@@ -1,10 +1,10 @@
-package com.ttstudios.kalah.web;
+package com.ttstudios.kalah.rest.web;
 
 import java.util.List;
 
 import com.ttstudios.kalah.persistence.model.Book;
-import com.ttstudios.kalah.web.exception.BookIdMismatchException;
-import com.ttstudios.kalah.web.exception.BookNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.BookIdMismatchException;
+import com.ttstudios.kalah.rest.web.exception.BookNotFoundException;
 import com.ttstudios.kalah.persistence.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

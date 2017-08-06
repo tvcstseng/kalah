@@ -1,11 +1,11 @@
-package com.ttstudios.kalah.web;
+package com.ttstudios.kalah.rest.web;
 
-import com.ttstudios.kalah.web.exception.BookIdMismatchException;
-import com.ttstudios.kalah.web.exception.BookNotFoundException;
-import com.ttstudios.kalah.web.exception.KalahGameIdMismatchException;
-import com.ttstudios.kalah.web.exception.KalahGameNotFoundException;
-import com.ttstudios.kalah.web.exception.UserIdMismatchException;
-import com.ttstudios.kalah.web.exception.UserNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.UserNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.BookIdMismatchException;
+import com.ttstudios.kalah.rest.web.exception.BookNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.KalahGameIdMismatchException;
+import com.ttstudios.kalah.rest.web.exception.KalahGameNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.UserIdMismatchException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;

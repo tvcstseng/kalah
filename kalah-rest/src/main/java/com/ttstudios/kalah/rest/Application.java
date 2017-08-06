@@ -1,4 +1,4 @@
-package com.ttstudios.kalah;
+package com.ttstudios.kalah.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

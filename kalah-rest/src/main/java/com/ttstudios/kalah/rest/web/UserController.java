@@ -1,9 +1,9 @@
-package com.ttstudios.kalah.web;
+package com.ttstudios.kalah.rest.web;
 
 import com.ttstudios.kalah.persistence.model.User;
 import com.ttstudios.kalah.persistence.repo.UserRepository;
-import com.ttstudios.kalah.web.exception.UserIdMismatchException;
-import com.ttstudios.kalah.web.exception.UserNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.UserIdMismatchException;
+import com.ttstudios.kalah.rest.web.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

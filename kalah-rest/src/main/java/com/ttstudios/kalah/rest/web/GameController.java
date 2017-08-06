@@ -1,9 +1,9 @@
-package com.ttstudios.kalah.web;
+package com.ttstudios.kalah.rest.web;
 
 import com.ttstudios.kalah.persistence.model.KalahGame;
 import com.ttstudios.kalah.persistence.repo.KalahRepository;
-import com.ttstudios.kalah.web.exception.KalahGameIdMismatchException;
-import com.ttstudios.kalah.web.exception.KalahGameNotFoundException;
+import com.ttstudios.kalah.rest.web.exception.KalahGameIdMismatchException;
+import com.ttstudios.kalah.rest.web.exception.KalahGameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

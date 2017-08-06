@@ -1,4 +1,4 @@
-package com.ttstudios.kalah.config;
+package com.ttstudios.kalah.rest.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
