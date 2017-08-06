@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -36,7 +38,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Book findOne(@PathVariable Long id) {
+    public Book findOne(@PathVariable String id) {
         final Book book = bookRepository.findOne(id);
         if (book == null) {
             throw new BookNotFoundException();
@@ -46,12 +48,12 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
+    public Book create(@Valid @RequestBody Book book) {
         return bookRepository.save(book);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         final Book book = bookRepository.findOne(id);
         if (book == null) {
             throw new BookNotFoundException();
@@ -60,8 +62,8 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable Long id) {
-        if (book.getId() != id) {
+    public Book updateBook(@RequestBody Book book, @PathVariable String id) {
+        if (!book.getId().equals( id )) {
             throw new BookIdMismatchException();
         }
         final Book old = bookRepository.findOne(id);

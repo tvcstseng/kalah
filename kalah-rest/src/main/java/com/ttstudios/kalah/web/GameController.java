@@ -31,13 +31,13 @@ public class GameController {
     }
 
     @GetMapping("/title/{gameTitle}")
-    public List<KalahGame> findByTitle(@PathVariable String gameTitle) {
-        return repository.findByTitle(gameTitle);
+    public List<KalahGame> findByTitle( @PathVariable String gameTitle ) {
+        return repository.findByTitle( gameTitle );
     }
 
     @GetMapping("/{id}")
-    public KalahGame findOne(@PathVariable Long id) {
-        final KalahGame game = repository.findOne(id);
+    public KalahGame findOne( @PathVariable String id ) {
+        final KalahGame game = repository.findOne( id );
         if (game == null) {
             throw new KalahGameNotFoundException();
         }
@@ -46,30 +46,30 @@ public class GameController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public KalahGame create(@RequestBody KalahGame game) {
+    public KalahGame create( @RequestBody KalahGame game ) {
 
-        return repository.save(game);
+        return repository.save( game );
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        final KalahGame game = repository.findOne(id);
+    public void delete( @PathVariable String id ) {
+        final KalahGame game = repository.findOne( id );
         if (game == null) {
             throw new KalahGameNotFoundException();
         }
-        repository.delete(id);
+        repository.delete( id );
     }
 
     @PutMapping("/{id}")
-    public KalahGame updateKalahGame(@RequestBody KalahGame game, @PathVariable Long id) {
-        if (game.getId() != id) {
+    public KalahGame updateKalahGame( @RequestBody KalahGame game, @PathVariable String id ) {
+        if (!game.getId().equals( id )) {
             throw new KalahGameIdMismatchException();
         }
-        final KalahGame old = repository.findOne(id);
+        final KalahGame old = repository.findOne( id );
         if (old == null) {
             throw new KalahGameNotFoundException();
         }
-        return repository.save(game);
+        return repository.save( game );
     }
 
 }
