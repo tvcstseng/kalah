@@ -8,10 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("be.g00glen00b")
 //@EnableJpaRepositories("com.ttstudios.kalah.persistence.repo")
 //@EntityScan("com.ttstudios.kalah.persistence.model")
-public class Application {
+public class ApplicationWebsockets {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run( ApplicationWebsockets.class, args);
     }
 
 }
