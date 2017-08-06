@@ -25,6 +25,7 @@
     </properties>
 
     <modules>
+        <module>kalah-dao</module>
         <module>kalah-gameplay</module>
         <module>kalah-rest</module>
         <module>kalah-websockets</module>
@@ -33,6 +34,12 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>kalah-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -48,10 +55,17 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>kalah-websockets</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>kalah-angular</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- 3rd party -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>

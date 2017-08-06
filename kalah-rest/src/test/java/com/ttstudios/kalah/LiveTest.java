@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,8 +95,8 @@ public class LiveTest {
     public void whenUpdateCreatedBook_thenUpdated() {
         final Book book = createRandomBook();
         final String location = createBookAsUri(book);
-
-        book.setId(Long.parseLong(location.split("api/books/")[1]));
+        String newId = location.split("api/books/")[1];
+        book.setId(newId);
         book.setAuthor("newAuthor");
         Response response = RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON_VALUE)

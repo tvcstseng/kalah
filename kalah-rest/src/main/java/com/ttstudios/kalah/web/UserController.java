@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User findOne(@PathVariable Long id) {
+    public User findOne(@PathVariable String id) {
         final User user = repository.findOne(id);
         if (user == null) {
             throw new UserNotFoundException();
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         final User user = repository.findOne(id);
         if (user == null) {
             throw new UserNotFoundException();
@@ -60,8 +60,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable Long id) {
-        if (user.getId() != id) {
+    public User updateUser(@RequestBody User user, @PathVariable String id) {
+        if (!user.getId().equals( id )) {
             throw new UserIdMismatchException();
         }
         final User old = repository.findOne(id);

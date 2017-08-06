@@ -28,6 +28,7 @@ hs_err_pid*
 /tmp
 /out-tsc
 **/node_modules/**
+**/target/**
 
 # dependencies
 /node_modules
@@ -68,4 +69,5 @@ yarn.lock
 kalah-angular/kalah-angular.iml
 kalah-gameplay/kalah-gameplay.iml
 kalah-rest/kalah-rest.iml
+kalah-dao/kalah-dao.iml
 kalah.iml
