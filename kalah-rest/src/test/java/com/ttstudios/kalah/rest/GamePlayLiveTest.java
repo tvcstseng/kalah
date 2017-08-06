@@ -1,18 +1,8 @@
-package com.ttstudios.kalah;
+package com.ttstudios.kalah.rest;
 
-import static io.restassured.RestAssured.preemptive;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import com.ttstudios.kalah.persistence.model.Book;
+import com.ttstudios.kalah.persistence.model.KalahGame;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-
-import java.util.List;
-
-import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,99 +12,108 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
+import static io.restassured.RestAssured.preemptive;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { Application.class }, webEnvironment = WebEnvironment.DEFINED_PORT)
-public class BookLiveTest {
+public class GamePlayLiveTest {
 
     @Before
     public void setUp() {
         RestAssured.authentication = preemptive().basic("john", "123");
     }
 
-    private static final String API_ROOT = "http://localhost:8081/api/books";
+    private static final String API_ROOT = "http://localhost:8081/api/kalah-games";
+    private static final String API_ROUTE = "api/kalah-games/";
 
     @Test
-    public void whenGetAllBooks_thenOK() {
+    public void whenGetAllGames_thenOK() {
         final Response response = RestAssured.get(API_ROOT);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
     }
 
     @Test
-    public void whenGetBooksByTitle_thenOK() {
-        final Book book = createRandomBook();
-        createBookAsUri(book);
+    public void whenGetGamesByTitle_thenOK() {
+        final KalahGame game = createRandomKalahGame();
+        createGameAsUri(game);
 
-        final Response response = RestAssured.get(API_ROOT + "/title/" + book.getTitle());
+        final Response response = RestAssured.get(API_ROOT + "/title/" + game.getTitle());
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertTrue(response.as(List.class)
             .size() > 0);
     }
 
     @Test
-    public void whenGetCreatedBookById_thenOK() {
-        final Book book = createRandomBook();
-        final String location = createBookAsUri(book);
+    public void whenGetCreatedGameById_thenOK() {
+        final KalahGame game = createRandomKalahGame();
+        final String location = createGameAsUri(game);
 
         final Response response = RestAssured.get(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals(book.getTitle(), response.jsonPath()
+        assertEquals(game.getTitle(), response.jsonPath()
             .get("title"));
     }
 
     @Test
-    public void whenGetNotExistBookById_thenNotFound() {
+    public void whenGetNotExistGameById_thenNotFound() {
         final Response response = RestAssured.get(API_ROOT + "/" + randomNumeric(4));
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
     }
 
     // POST
     @Test
-    public void whenCreateNewBook_thenCreated() {
-        final Book book = createRandomBook();
+    public void whenCreateNewGame_thenCreated() {
+        final KalahGame game = createRandomKalahGame();
 
         final Response response = RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(book)
+            .body(game)
             .post(API_ROOT);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
     }
 
     @Test
-    public void whenInvalidBook_thenError() {
-        final Book book = createRandomBook();
-        book.setAuthor(null);
+    public void whenInvalidGame_thenError() {
+        final KalahGame game = createRandomKalahGame();
+        game.setTitle(null);
 
         final Response response = RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(book)
+            .body(game)
             .post(API_ROOT);
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());
     }
 
     @Test
-    public void whenUpdateCreatedBook_thenUpdated() {
-        final Book book = createRandomBook();
-        final String location = createBookAsUri(book);
-        String newId = location.split("api/books/")[1];
-        book.setId(newId);
-        book.setAuthor("newAuthor");
+    public void whenUpdateCreatedGame_thenUpdated() {
+        final KalahGame game = createRandomKalahGame();
+        final String location = createGameAsUri(game);
+        String newId = location.split(API_ROUTE)[1];
+        game.setId(newId);
+        game.setTitle("newTitle");
         Response response = RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(book)
+            .body(game)
             .put(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         response = RestAssured.get(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals("newAuthor", response.jsonPath()
-            .get("author"));
+        assertEquals("newTitle", response.jsonPath()
+            .get("title"));
 
     }
 
     @Test
-    public void whenDeleteCreatedBook_thenOk() {
-        final Book book = createRandomBook();
-        final String location = createBookAsUri(book);
+    public void whenDeleteCreatedGame_thenOk() {
+        final KalahGame game = createRandomKalahGame();
+        final String location = createGameAsUri(game);
 
         Response response = RestAssured.delete(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
@@ -125,17 +124,18 @@ public class BookLiveTest {
 
     // ===============================
 
-    private Book createRandomBook() {
-        final Book book = new Book();
-        book.setTitle(randomAlphabetic(10));
-        book.setAuthor(randomAlphabetic(15));
-        return book;
+    private KalahGame createRandomKalahGame() {
+        final KalahGame game = new KalahGame();
+        game.setTitle(randomAlphabetic(10));
+        game.setPlayer1(randomAlphabetic(15));
+        game.setPlayer2(randomAlphabetic(15));
+        return game;
     }
 
-    private String createBookAsUri(Book book) {
+    private String createGameAsUri(KalahGame game) {
         final Response response = RestAssured.given()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(book)
+            .body(game)
             .post(API_ROOT);
         return API_ROOT + "/" + response.jsonPath()
             .get("id");

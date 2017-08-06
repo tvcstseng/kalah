@@ -4,7 +4,7 @@ import com.ttstudios.kalah.dto.World;
 
 public class MoveStrategy{
 
-    protected World execute(World world) {
+    protected World execute( World world) {
         // validate that it is users turn
         world.getGameState().getMoveQty() ;
 

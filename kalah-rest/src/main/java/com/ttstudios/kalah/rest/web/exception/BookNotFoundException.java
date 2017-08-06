@@ -1,4 +1,4 @@
-package com.ttstudios.kalah.web.exception;
+package com.ttstudios.kalah.rest.web.exception;
 
 public class BookNotFoundException extends RuntimeException {
 
