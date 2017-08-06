@@ -2,6 +2,10 @@ package com.ttstudios.kalah.web;
 
 import com.ttstudios.kalah.web.exception.BookIdMismatchException;
 import com.ttstudios.kalah.web.exception.BookNotFoundException;
+import com.ttstudios.kalah.web.exception.KalahGameIdMismatchException;
+import com.ttstudios.kalah.web.exception.KalahGameNotFoundException;
+import com.ttstudios.kalah.web.exception.UserIdMismatchException;
+import com.ttstudios.kalah.web.exception.UserNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
@@ -19,14 +23,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         super();
     }
 
-    @ExceptionHandler({ BookNotFoundException.class })
-    protected ResponseEntity<Object> handleNotFound(Exception ex, WebRequest request) {
-        return handleExceptionInternal(ex, "Book not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    @ExceptionHandler({BookNotFoundException.class, KalahGameNotFoundException.class, UserNotFoundException.class})
+    protected ResponseEntity<Object> handleNotFound( Exception ex, WebRequest request ) {
+        return handleExceptionInternal( ex, "Entity not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request );
     }
 
-    @ExceptionHandler({ BookIdMismatchException.class, ConstraintViolationException.class, DataIntegrityViolationException.class })
-    public ResponseEntity<Object> handleBadRequest(Exception ex, WebRequest request) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    @ExceptionHandler({BookIdMismatchException.class, UserIdMismatchException.class, KalahGameIdMismatchException.class, ConstraintViolationException.class, DataIntegrityViolationException.class})
+    public ResponseEntity<Object> handleBadRequest( Exception ex, WebRequest request ) {
+        return handleExceptionInternal( ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request );
     }
-
 }

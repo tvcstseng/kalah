@@ -62,7 +62,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable String id) {
+    public Book updateBook(@Valid @RequestBody Book book, @PathVariable String id) {
         if (!book.getId().equals( id )) {
             throw new BookIdMismatchException();
         }
