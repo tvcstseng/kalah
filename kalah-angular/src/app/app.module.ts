@@ -14,6 +14,7 @@ import {StompConfig, StompService} from '@stomp/ng2-stompjs';
 import * as SockJS from 'sockjs-client';
 import {RawDataComponent} from './rawdata/rawdata.component';
 import {StatusComponent} from './status/status.component';
+import {GamesOverviewComponent} from "./games-overview/games-overview.component";
 
 export function socketProvider() {
   return new SockJS('/chat');
@@ -52,7 +53,7 @@ const stompConfig: StompConfig = {
     , KalahGameComponent
     , UserComponent
     , RawDataComponent
-    , StatusComponent
+    , StatusComponent, GamesOverviewComponent
   ],
   imports: [
     AlertModule.forRoot()
