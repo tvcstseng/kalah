@@ -16,6 +16,9 @@ import {RawDataComponent} from './rawdata/rawdata.component';
 import {StatusComponent} from './status/status.component';
 import {GamesOverviewComponent} from "./games-overview/games-overview.component";
 
+import {DataTableModule,SharedModule} from 'primeng/primeng';
+import {GameService} from "./game.service";
+
 export function socketProvider() {
   return new SockJS('/chat');
 }
@@ -62,11 +65,14 @@ const stompConfig: StompConfig = {
     , HttpModule
     , ButtonModule
     , InputTextModule
+    , DataTableModule
+    , SharedModule
   ],
   providers: [
     KalahGameService,
     EmitterService,
     UserService,
+    GameService,
     StompService,
     {
       provide: StompConfig,

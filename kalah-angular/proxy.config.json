@@ -10,5 +10,11 @@
     "secure": false,
     "ws": true,
     "loglevel": "debug"
+  },
+  "/api/kalah-games": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "ws": true,
+    "loglevel": "debug"
   }
 }
